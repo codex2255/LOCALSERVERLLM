@@ -47,6 +47,8 @@ HTML_PAGE = """
         pre { background: #0b1120; padding: 15px; border-radius: 5px; overflow-x: auto; color: #a5b4fc; border: 1px solid #334155; }
         code { background: #0b1120; padding: 2px 6px; border-radius: 4px; color: #f8fafc; border: 1px solid #334155; }
         .status { display: inline-block; padding: 5px 10px; background: #10b981; color: #022c22; border-radius: 5px; font-weight: bold; font-size: 0.85em; }
+        a { color: #38bdf8; text-decoration: none; }
+        a:hover { text-decoration: underline; }
         
         /* Tab CSS */
         .tab { overflow: hidden; border-bottom: 1px solid #334155; margin-bottom: 20px; display: flex; }
@@ -62,7 +64,7 @@ HTML_PAGE = """
         .btn-danger { background: #ef4444; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer; font-weight: bold; }
         .btn-danger:hover { background: #dc2626; }
         
-        ul { padding-left: 20px; }
+        ul, ol { padding-left: 20px; }
         li { margin-bottom: 8px; }
         .key-item { background: #0b1120; padding: 12px; margin-bottom: 8px; border-radius: 5px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #334155; }
     </style>
@@ -159,7 +161,17 @@ HTML_PAGE = """
         </div>
 
         <div id="Documentation" class="tabcontent">
-            <h3>How to use this API (OpenAI Drop-in Replacement)</h3>
+            
+            <h3>1. Install Ollama (The AI Engine)</h3>
+            <p>This gateway requires Ollama to be installed and running on the host machine.</p>
+            <ul>
+                <li><strong>Linux / macOS:</strong> Run <code>curl -fsSL https://ollama.com/install.sh | sh</code> in your terminal.</li>
+                <li><strong>Windows:</strong> Download the installer from <a href="https://ollama.com/download" target="_blank">ollama.com/download</a>.</li>
+            </ul>
+            <p>Once installed, open a terminal and pull your first model (for example, Llama 3.1):</p>
+            <pre>ollama pull llama3.1</pre>
+
+            <h3>2. Connect your Apps (OpenAI Drop-in)</h3>
             <p>You can point ANY application that uses OpenAI to this server. Just change the Base URL in your client software to this device's IP and input one of your generated keys.</p>
             <pre>
 curl --location 'http://[DEVICE_IP]:5000/v1/chat/completions' \\
@@ -176,7 +188,6 @@ curl --location 'http://[DEVICE_IP]:5000/v1/chat/completions' \\
             <h3>Headless Hardware Setup</h3>
             <p>If you are running this on a laptop and want to close the lid without it going to sleep:</p>
             <ol>
-                <li>Ollama must be installed and running on the host device.</li>
                 <li>Edit your login configuration: <code>sudo nano /etc/systemd/logind.conf</code></li>
                 <li>Find <code>#HandleLidSwitch=suspend</code>, uncomment it, and change it to: <code>HandleLidSwitch=ignore</code></li>
                 <li>Restart the service: <code>sudo systemctl restart systemd-logind</code></li>
@@ -188,7 +199,6 @@ curl --location 'http://[DEVICE_IP]:5000/v1/chat/completions' \\
 </body>
 </html>
 """
-
 # --- GUI ROUTES ---
 @app.route('/', methods=['GET'])
 def dashboard():
