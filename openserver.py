@@ -147,7 +147,7 @@ HTML_PAGE = """
 
         <div id="Dashboard" class="tabcontent">
             <h3>API Key Management</h3>
-            <p style="font-size: 0.9em; color: #94a3b8;">Generate access keys below. Pass these in the <code>Authorization: Bearer</code> header to connect to the node.</p>
+            <p style="font-size: 0.9em; color: #94a3b8;">Generate access keys below. Pass these in the <code>Authorization: Bearer</code> header to connect any app to this node.</p>
             <button class="btn-primary" onclick="generateKey()">+ Generate New API Key</button>
             <div id="key-list" style="margin-top: 15px;">
                 <p style="color: #94a3b8;">Loading keys...</p>
@@ -171,8 +171,8 @@ HTML_PAGE = """
             <p>Once installed, open a terminal and pull your first model (for example, Llama 3.1):</p>
             <pre>ollama pull llama3.1</pre>
 
-            <h3>2. Connect your Apps (OpenAI Drop-in)</h3>
-            <p>You can point ANY application that uses OpenAI to this server. Just change the Base URL in your client software to this device's IP and input one of your generated keys.</p>
+            <h3>2. Connect your Apps (Universal API Format)</h3>
+            <p>This server uses the industry-standard API structure. You can point almost ANY AI application, coding assistant, or automation tool to this local server. Just change the Base URL in your client software to this device's IP and input one of your generated keys.</p>
             <pre>
 curl --location 'http://[DEVICE_IP]:5000/v1/chat/completions' \\
 --header 'Authorization: Bearer YOUR_GENERATED_API_KEY' \\
